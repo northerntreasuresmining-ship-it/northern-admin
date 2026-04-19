@@ -32,7 +32,10 @@ const CookieConsent: React.FC = () => {
                 </div>
                 <div className="flex gap-4">
                     <button 
-                        onClick={() => setIsVisible(false)} // Just dismiss for session if declined/settings not built yet
+                        onClick={() => {
+                            localStorage.setItem('cookieConsent', 'false');
+                            setIsVisible(false);
+                        }}
                         className="px-6 py-2.5 text-sm font-sans text-primary border border-primary/30 hover:bg-primary/5 transition-colors duration-300 rounded-sm"
                     >
                         Decline
