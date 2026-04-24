@@ -61,20 +61,20 @@ const DashboardOverview: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="animate-pulse space-y-8 bg-primary rounded-sm p-4">
+            <div className="animate-pulse space-y-8 rounded-sm p-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {[1, 2, 3, 4].map(i => (
-                        <div key={i} className="h-32 bg-white/5 border border-white/10 rounded-sm"></div>
+                        <div key={i} className="h-32 bg-slate-50 border border-slate-200 rounded-sm"></div>
                     ))}
                 </div>
-                <div className="h-96 bg-white/5 border border-white/10 rounded-sm"></div>
+                <div className="h-96 bg-slate-50 border border-slate-200 rounded-sm"></div>
             </div>
         );
     }
 
     if (error || !stats || !analytics) {
         return (
-            <div className="p-8 bg-red-500/10 text-red-500 rounded-sm border border-red-500/20">
+            <div className="p-8 bg-red-50 text-red-600 rounded-sm border border-red-200">
                 <h3 className="font-bold uppercase tracking-widest text-sm mb-2">Error Accessing Data</h3>
                 <p>{error || 'Unable to load dashboard'}</p>
             </div>
@@ -107,7 +107,7 @@ const DashboardOverview: React.FC = () => {
             value: `PKR ${stats.stats.totalRevenue.toLocaleString()}`,
             growth: analytics.growth.revenue,
             icon: DollarSign,
-            color: 'bg-white/[0.03]',
+            color: 'bg-slate-50',
             textColor: 'text-accent-gold'
         },
         {
@@ -115,45 +115,45 @@ const DashboardOverview: React.FC = () => {
             value: stats.stats.totalOrders.toString(),
             growth: analytics.growth.orders,
             icon: ShoppingBag,
-            color: 'bg-white/[0.03]',
-            textColor: 'text-white'
+            color: 'bg-slate-50',
+            textColor: 'text-primary'
         },
         {
             label: 'Total Customers',
             value: stats.stats.totalUsers.toString(),
             growth: '+12.5',
             icon: Users,
-            color: 'bg-white/[0.03]',
-            textColor: 'text-white'
+            color: 'bg-slate-50',
+            textColor: 'text-primary'
         },
         {
             label: 'Products',
             value: stats.stats.totalProducts.toString(),
             growth: '+5.2',
             icon: Package,
-            color: 'bg-white/[0.03]',
-            textColor: 'text-white'
+            color: 'bg-slate-50',
+            textColor: 'text-primary'
         }
     ];
 
     return (
-        <div className="space-y-8 bg-primary/40 min-h-screen text-white">
+        <div className="space-y-8 min-h-screen text-slate-900">
             {/* Period Selector */}
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-4xl font-sans font-black tracking-tighter uppercase mb-2">Analytics <span className="text-accent-gold italic">Dashboard</span></h1>
-                    <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.3em]">Comprehensive Obsidian & Gold Insights</p>
+                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">Comprehensive Obsidian & Gold Insights</p>
                 </div>
-                <div className="flex items-center space-x-3 bg-white/[0.02] border border-white/10 p-1 px-3">
+                <div className="flex items-center space-x-3 bg-slate-50 border border-slate-200 p-1 px-3">
                     <Calendar className="w-4 h-4 text-accent-gold" />
                     <select
                         value={period}
                         onChange={(e) => setPeriod(e.target.value)}
-                        className="bg-transparent text-white text-[10px] uppercase font-black tracking-widest focus:outline-none appearance-none cursor-pointer py-2 pl-2 pr-8 border-none focus:ring-0"
+                        className="bg-transparent text-slate-900 text-[10px] uppercase font-black tracking-widest focus:outline-none appearance-none cursor-pointer py-2 pl-2 pr-8 border-none focus:ring-0"
                     >
-                        <option value="7" className="bg-primary text-white">Last 7 Days</option>
-                        <option value="30" className="bg-primary text-white">Last 30 Days</option>
-                        <option value="90" className="bg-primary text-white">Last 90 Days</option>
+                        <option value="7" className="bg-white text-slate-900">Last 7 Days</option>
+                        <option value="30" className="bg-white text-slate-900">Last 30 Days</option>
+                        <option value="90" className="bg-white text-slate-900">Last 90 Days</option>
                     </select>
                 </div>
             </div>
@@ -161,9 +161,9 @@ const DashboardOverview: React.FC = () => {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {statCards.map((card) => (
-                    <div key={card.label} className="card-premium grain-texture p-8 group relative overflow-hidden">
+                    <div key={card.label} className="card-premium grain-texture p-8 group relative overflow-hidden bg-white border border-slate-100">
                         <div className="flex items-center justify-between mb-6 relative z-10">
-                            <div className="bg-primary p-4 rounded-2xl text-accent border border-accent/20 group-hover:bg-accent group-hover:text-primary transition-all duration-500 shadow-xl group-hover:shadow-accent/20 relative overflow-hidden">
+                            <div className="bg-slate-50 p-4 rounded-2xl text-accent border border-accent/20 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-sm relative overflow-hidden">
                                 <div className="absolute inset-0 shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 <card.icon className="w-6 h-6 relative z-10" />
                             </div>
@@ -187,9 +187,8 @@ const DashboardOverview: React.FC = () => {
             {/* Charts Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Revenue Over Time */}
-                <div className="bg-primary border border-white/10 p-8 grain-texture shadow-2xl relative">
-                    <div className="absolute inset-0 bg-white/[0.02] z-0"></div>
-                    <h3 className="font-sans font-black text-white text-xl uppercase tracking-tighter mb-6 relative z-10">Revenue <span className="text-accent-gold italic">Trend</span></h3>
+                <div className="bg-white border border-slate-100 p-8 grain-texture shadow-premium relative">
+                    <h3 className="font-sans font-black text-slate-900 text-xl uppercase tracking-tighter mb-6 relative z-10">Revenue <span className="text-accent-gold italic">Trend</span></h3>
                     <ResponsiveContainer width="100%" height={300} className="relative z-10">
                         <AreaChart data={formattedDailyData}>
                             <defs>
@@ -198,11 +197,11 @@ const DashboardOverview: React.FC = () => {
                                     <stop offset="95%" stopColor="#009e99" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
-                            <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#2a2a2a' }} tickLine={{ stroke: '#2a2a2a' }} />
-                            <YAxis tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#2a2a2a' }} tickLine={{ stroke: '#2a2a2a' }} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                            <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={{ stroke: '#f1f5f9' }} tickLine={{ stroke: '#f1f5f9' }} />
+                            <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={{ stroke: '#f1f5f9' }} tickLine={{ stroke: '#f1f5f9' }} />
                             <Tooltip
-                                contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', fontSize: '10px', color: '#fff', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900' }}
+                                contentStyle={{ backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '10px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
                                 itemStyle={{ color: '#009e99' }}
                             />
                             <Area type="monotone" dataKey="revenue" stroke="#009e99" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
@@ -210,27 +209,25 @@ const DashboardOverview: React.FC = () => {
                     </ResponsiveContainer>
                 </div>
 
-                {/* Orders Over Time */}
-                <div className="bg-primary border border-white/10 p-8 grain-texture shadow-2xl relative">
-                    <div className="absolute inset-0 bg-white/[0.02] z-0"></div>
-                    <h3 className="font-sans font-black text-white text-xl uppercase tracking-tighter mb-6 relative z-10">Order <span className="text-white/50 italic">Volume</span></h3>
+                {/* Order Volume Over Time */}
+                <div className="bg-white border border-slate-100 p-8 grain-texture shadow-premium relative">
+                    <h3 className="font-sans font-black text-slate-900 text-xl uppercase tracking-tighter mb-6 relative z-10">Order <span className="text-slate-400 italic">Volume</span></h3>
                     <ResponsiveContainer width="100%" height={300} className="relative z-10">
                         <BarChart data={formattedDailyData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
-                            <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#2a2a2a' }} tickLine={{ stroke: '#2a2a2a' }} />
-                            <YAxis tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#2a2a2a' }} tickLine={{ stroke: '#2a2a2a' }} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                            <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={{ stroke: '#f1f5f9' }} tickLine={{ stroke: '#f1f5f9' }} />
+                            <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={{ stroke: '#f1f5f9' }} tickLine={{ stroke: '#f1f5f9' }} />
                             <Tooltip
-                                contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', fontSize: '10px', color: '#fff', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900' }}
+                                contentStyle={{ backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '10px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
                             />
-                            <Bar dataKey="orders" fill="#fff" fillOpacity={0.8} />
+                            <Bar dataKey="orders" fill="#00827f" fillOpacity={0.8} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
 
                 {/* Sales by Category */}
-                <div className="bg-primary border border-white/10 p-8 grain-texture shadow-2xl relative">
-                    <div className="absolute inset-0 bg-white/[0.02] z-0"></div>
-                    <h3 className="font-sans font-black text-white text-xl uppercase tracking-tighter mb-6 relative z-10">Sales <span className="text-accent-gold italic">By Category</span></h3>
+                <div className="bg-white border border-slate-100 p-8 grain-texture shadow-premium relative">
+                    <h3 className="font-sans font-black text-slate-900 text-xl uppercase tracking-tighter mb-6 relative z-10">Sales <span className="text-accent-gold italic">By Category</span></h3>
                     <ResponsiveContainer width="100%" height={300} className="relative z-10">
                         <PieChart>
                             <Pie
@@ -242,31 +239,30 @@ const DashboardOverview: React.FC = () => {
                                 outerRadius={100}
                                 fill="#8884d8"
                                 dataKey="value"
-                                stroke="#0a0a0a"
+                                stroke="#fff"
                                 strokeWidth={2}
                             >
                                 {categoryData.map((entry: any, index: number) => (
-                                    <Cell key={`cell-${index}`} fill={index === 0 ? '#009e99' : index === 1 ? '#ffffff' : index === 2 ? '#666666' : '#2a2a2a'} />
+                                    <Cell key={`cell-${index}`} fill={index === 0 ? '#009e99' : index === 1 ? '#0B1215' : index === 2 ? '#666666' : '#cbd5e1'} />
                                 ))}
                             </Pie>
                             <Tooltip
-                                contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', fontSize: '10px', color: '#fff', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900' }}
+                                contentStyle={{ backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '10px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
                             />
                         </PieChart>
                     </ResponsiveContainer>
                 </div>
 
                 {/* Top Products */}
-                <div className="bg-primary border border-white/10 p-8 grain-texture shadow-2xl relative">
-                    <div className="absolute inset-0 bg-white/[0.02] z-0"></div>
-                    <h3 className="font-sans font-black text-white text-xl uppercase tracking-tighter mb-6 relative z-10">Top <span className="text-white/50 italic">Products</span></h3>
+                <div className="bg-white border border-slate-100 p-8 grain-texture shadow-premium relative">
+                    <h3 className="font-sans font-black text-slate-900 text-xl uppercase tracking-tighter mb-6 relative z-10">Top <span className="text-slate-400 italic">Products</span></h3>
                     <ResponsiveContainer width="100%" height={300} className="relative z-10">
                         <BarChart data={topProductsChart} layout="vertical">
-                            <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
-                            <XAxis type="number" tick={{ fontSize: 11, fill: '#666' }} axisLine={{ stroke: '#2a2a2a' }} tickLine={{ stroke: '#2a2a2a' }} />
-                            <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 10, fill: '#ccc', fontWeight: 900, textTransform: 'uppercase' }} axisLine={{ stroke: '#2a2a2a' }} tickLine={{ stroke: '#2a2a2a' }} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                            <XAxis type="number" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={{ stroke: '#f1f5f9' }} tickLine={{ stroke: '#f1f5f9' }} />
+                            <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 10, fill: '#64748b', fontWeight: 900, textTransform: 'uppercase' }} axisLine={{ stroke: '#f1f5f9' }} tickLine={{ stroke: '#f1f5f9' }} />
                             <Tooltip
-                                contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', fontSize: '10px', color: '#fff', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900' }}
+                                contentStyle={{ backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '10px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
                             />
                             <Bar dataKey="revenue" fill="#009e99" />
                         </BarChart>
@@ -275,45 +271,44 @@ const DashboardOverview: React.FC = () => {
             </div>
 
             {/* Recent Orders Table */}
-            <div className="bg-primary/90 border border-white/10 grain-texture shadow-2xl overflow-hidden rounded-none relative">
-                <div className="absolute inset-0 bg-white/[0.01] z-0"></div>
-                <div className="px-8 py-6 border-b border-white/10 flex items-center justify-between relative z-10">
-                    <h3 className="font-sans font-black text-white text-xl uppercase tracking-tighter">Recent <span className="text-accent-gold italic">Orders</span></h3>
+            <div className="bg-white border border-slate-100 grain-texture shadow-premium overflow-hidden rounded-none relative">
+                <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between relative z-10">
+                    <h3 className="font-sans font-black text-slate-900 text-xl uppercase tracking-tighter">Recent <span className="text-accent-gold italic">Orders</span></h3>
                     <span className="text-[9px] font-black text-accent-gold bg-accent-gold/10 px-3 py-1 border border-accent-gold/20 uppercase tracking-[0.3em]">Live Feed</span>
                 </div>
                 <div className="overflow-x-auto relative z-10">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="bg-white/[0.02]">
-                                <th className="px-8 py-4 text-[9px] font-black text-white/40 uppercase tracking-[0.3em]">Order Ref</th>
-                                <th className="px-8 py-4 text-[9px] font-black text-white/40 uppercase tracking-[0.3em]">Client ID</th>
-                                <th className="px-8 py-4 text-[9px] font-black text-white/40 uppercase tracking-[0.3em]">Valuation</th>
-                                <th className="px-8 py-4 text-[9px] font-black text-white/40 uppercase tracking-[0.3em]">Status</th>
-                                <th className="px-8 py-4 text-[9px] font-black text-white/40 uppercase tracking-[0.3em]">Timestamp</th>
+                            <tr className="bg-slate-50/50">
+                                <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">Order Ref</th>
+                                <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">Client ID</th>
+                                <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">Valuation</th>
+                                <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">Status</th>
+                                <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.3em]">Timestamp</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5">
+                        <tbody className="divide-y divide-slate-50">
                             {stats.recentOrders.map((order) => (
-                                <tr key={order._id} className="hover:bg-white/[0.02] transition-colors">
-                                    <td className="px-8 py-5 font-mono text-[10px] text-white/60">
+                                <tr key={order._id} className="hover:bg-slate-50/50 transition-colors">
+                                    <td className="px-8 py-5 font-mono text-[10px] text-slate-500">
                                         {order._id.slice(-8).toUpperCase()}
                                     </td>
-                                    <td className="px-8 py-5 font-black text-white text-xs uppercase tracking-widest">
+                                    <td className="px-8 py-5 font-black text-slate-700 text-xs uppercase tracking-widest">
                                         {order.user?.name || 'GUEST-001'}
                                     </td>
                                     <td className="px-8 py-5 font-bold text-accent-gold text-sm font-sans">
-                                        PKR {order.totalPrice.toFixed(2)}
+                                        PKR {order.totalPrice.toLocaleString()}
                                     </td>
                                     <td className="px-8 py-5">
-                                        <span className={`text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 ${order.status === 'Delivered' ? 'bg-white/10 text-white' :
-                                            order.status === 'Shipped' ? 'bg-accent-gold/20 text-accent-gold' :
-                                                order.status === 'Cancelled' ? 'bg-red-500/20 text-red-500' :
-                                                    'bg-white/5 text-white/60'
+                                        <span className={`text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 ${order.status === 'Delivered' ? 'bg-emerald-100 text-emerald-600' :
+                                            order.status === 'Shipped' ? 'bg-amber-100 text-amber-600' :
+                                                order.status === 'Cancelled' ? 'bg-red-100 text-red-600' :
+                                                    'bg-slate-100 text-slate-600'
                                             }`}>
                                             {order.status}
                                         </span>
                                     </td>
-                                    <td className="px-8 py-5 text-[10px] text-white/40 font-black tracking-widest uppercase">
+                                    <td className="px-8 py-5 text-[10px] text-slate-400 font-black tracking-widest uppercase">
                                         {new Date(order.createdAt).toLocaleDateString()}
                                     </td>
                                 </tr>
